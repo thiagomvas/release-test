@@ -21,8 +21,10 @@ jobs:
         dotnet-version: 8.0.x  
     - name: Restore dependencies
       run: dotnet restore
+    - name : Build
+      run: dotnet build -c Release /p:Version=${{ github.event.inputs.version }} --output ./bin/Release
 
-    - name: Build and pack
+    - name: Pack
       run: dotnet pack -c Release /p:Version=${{ github.event.inputs.version }} --output ./bin/Release
 
     - name: Publish to NuGet
